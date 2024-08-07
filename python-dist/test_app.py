@@ -21,16 +21,18 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(data['name'], 'Not Found')
 
     def test_select_model(self):
-        response = self.app.post('/select_model', json={"model": "LLM1"})
+       # self.model = "Llama2"
+        self.model='mistral '
+        response = self.app.post('/select_model', json={"model": self.model})
         data = decode_json(response.data)
         self.assertEqual(response.status_code, 200)
-        self.model = "LLM1"
-        self.assertEqual(data['message'], 'Model set to LLM1')
+        self.assertEqual(data['message'], f'Model set to {self.model}')
 
     def test_query(self):
         question = "What is the weather today?"
         response = self.app.post('/query', json={"question": question})
         data = decode_json(response.data)
+        print(data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['answer'], f"Answer from {self.model} for {question}")
 

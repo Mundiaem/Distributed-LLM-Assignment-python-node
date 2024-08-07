@@ -33,16 +33,21 @@ app.register_error_handler(HTTPException, handle_exception)
 def select_model():
     data = request.get_json()
     model = data['model']
-    conversation_context.set_model(model)
-    return jsonify({"message": f"Model set to {model}", 'status': 'ok'}), 200
+    if model == 'Llama2' or model == 'mistral':
+        return jsonify({"message": f"Model set to {model}", 'status': 'ok'}), 200
+
+    else:
+        return jsonify({'error': f'Invalid model selected {model}',
+                        "message": "You can only select llama2 model or mistral "
+                                   "model"}), 400
 
 
 @app.route('/query', methods=['POST'])
 def query():
     data = request.get_json()
     question = data['question']
-    answer = conversation_context.get_answer(question)
-    return jsonify({"answer": answer, 'status': 'ok'}), 200
+    response = conversation_context.get_answer(question)
+    return jsonify(response), 200
 
 
 @app.route('/history', methods=['GET'])
