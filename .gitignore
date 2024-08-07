@@ -1,0 +1,15 @@
+# Ignore a specific file
+secret.txt
+
+# Ignore all log files
+*.log
+
+# Ignore a directory
+cache/
+
+# Ignore all files in a specific directory
+temp/*
+node_modules
+dist
+venv
+.idea

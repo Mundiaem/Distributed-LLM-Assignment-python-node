@@ -1,0 +1,25 @@
+services:
+  node-api:
+    build:
+      context: ./node-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - python-app
+
+  python-app:
+    build:
+      context: ./python-dist
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - FLASK_ENV=production
+
+
+networks:
+  default:
+    driver: bridge
