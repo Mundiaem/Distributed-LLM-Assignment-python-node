@@ -65,17 +65,17 @@ class ConversationContext(object):
 class Transformers(object):
 
     def load_llma2_model(self):
-        model_name = 'meta-llama/Llama-2-7b-hf'
-        # tokenizer = LlamaForQuestionAnswering.from_pretrained("meta-llama/Llama-2-70b-chat-hf", token=HUGGING_FACE_TOKEN)
-        # model = LlamaForQuestionAnswering.from_pretrained("meta-llama/Llama-2-70b-chat-hf", token=HUGGING_FACE_TOKEN)
-        tokenizer = AutoTokenizer.from_pretrained(model_name, use_authtoken=True)
-        model = AutoModelForCausalLM.from_pretrained(model_name, use_authtoken=True)
+        model_name = 'meta-llama/Llama-2-7b'
+        # tokenizer = LlamaForQuestionAnswering.from_pretrained(model_name, token=HUGGING_FACE_TOKEN)
+        # model = LlamaForQuestionAnswering.from_pretrained(model_name, token=HUGGING_FACE_TOKEN)
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModelForCausalLM.from_pretrained(model_name)
         return model, tokenizer
 
     def load_mistral_model(self):
-        model_name = 'mistralai/Mistral-Large-Instruct-2407'
-        tokenizer = AutoTokenizer.from_pretrained(model_name, use_authtoken=True)
-        model = AutoModelForCausalLM.from_pretrained(model_name, use_authtoken=True)
+        model_name = 'smallsuper/Mistral-7B-v0.1-4bit-8rank'
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModelForCausalLM.from_pretrained(model_name)
         return model, tokenizer
 
     def generate_response(self, question, model, tokenizer, context=None):

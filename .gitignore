@@ -14,3 +14,4 @@ dist
 venv
 .idea
 vcpkg
+tests_llm.py

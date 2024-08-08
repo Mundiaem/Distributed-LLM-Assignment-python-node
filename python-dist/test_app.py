@@ -21,8 +21,8 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(data['name'], 'Not Found')
 
     def test_select_model(self):
-       # self.model = "Llama2"
-        self.model='mistral '
+        self.model = "Llama2"
+        #  self.model='mistral '
         response = self.app.post('/select_model', json={"model": self.model})
         data = decode_json(response.data)
         self.assertEqual(response.status_code, 200)
